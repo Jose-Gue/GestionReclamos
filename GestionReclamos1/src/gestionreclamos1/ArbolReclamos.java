@@ -60,4 +60,108 @@ public class ArbolReclamos {
     }
     
     
+    public void eliminar(int codigo){
+        raiz = eliminarRec(raiz, codigo);
+        
+    }
+    
+    public NodoArbol eliminarRec(NodoArbol nodo, int codigo){
+        if(nodo == null){
+            return null;
+        }
+        
+        int codigoActual = nodo.getReclamo().getCodigo();
+        
+        if(codigo < codigoActual){
+            
+            nodo.setIzquierda(eliminarRec(nodo.getIzquierda(), codigo));
+            
+        }else if(codigo > codigoActual){
+            
+            nodo.setDerecha(eliminarRec(nodo.getDerecha(), codigo));
+        }else{
+            
+            if(nodo.getIzquierda() == null){
+                return nodo.getDerecha();
+            }
+            if(nodo.getDerecha() == null){
+                return nodo.getIzquierda();
+            }
+            
+            NodoArbol sucesor = nodo.getDerecha();
+            
+            while(sucesor.getIzquierda() != null){
+                
+                sucesor = sucesor.getIzquierda();
+            }
+            nodo.setReclamo(sucesor.getReclamo());
+            
+            nodo.setDerecha(eliminarRec(nodo.getDerecha(), sucesor.getReclamo().getCodigo()));
+        }
+        return nodo;
+        
+    }
+    
+    public void mostrarInOrden(){
+        if(raiz== null){
+            System.out.println("No hay reclamos registrados");
+        }else{
+            inOrden(raiz);
+        }
+    }
+    
+    private void inOrden(NodoArbol nodo){
+        if(nodo != null){
+            
+           inOrden(nodo.getIzquierda());
+           
+           System.out.println(nodo.getReclamo().getCodigo());
+           
+           inOrden(nodo.getDerecha());
+            
+        }
+        
+    }
+    
+    public void mostrarPreOrden(){
+        if(raiz == null){
+            System.out.println("No hay reclamos registrados");
+        }
+        else{
+            preOrden(raiz);
+        }
+        
+    }
+    
+    private void preOrden(NodoArbol nodo){
+        if(nodo != null){
+            
+            System.out.println(nodo.getReclamo().getCodigo());
+            
+            preOrden(nodo.getIzquierda());
+            
+            preOrden(nodo.getDerecha());
+        }
+        
+    }
+    
+    public void mostrarPostOrden(){
+        if(raiz == null){
+            System.out.println("No hay reclamos registrados");
+            
+        }else{
+            postOrden(raiz);
+        }
+    }
+    
+    private void postOrden(NodoArbol nodo){
+        if(nodo != null){
+            
+            postOrden(nodo.getIzquierda());
+            postOrden(nodo.getDerecha());
+            System.out.println(nodo.getReclamo().getCodigo());
+            
+        }
+    }
+    
 }
