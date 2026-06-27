@@ -1,16 +1,13 @@
+
 package gestionreclamos1;
 
-/**
- *
- * @author salaz
- */
+
 public class NodoArbol {
-    
     private Reclamo reclamo;
     private NodoArbol izquierda;
     private NodoArbol derecha;
     
-    public NodoArbol(Reclamo reclamo) {
+    public NodoArbol(Reclamo reclamo){
         this.reclamo = reclamo;
         this.izquierda = null;
         this.derecha = null;
@@ -44,3 +41,5 @@ public class NodoArbol {
     
     
 }
+    
+
