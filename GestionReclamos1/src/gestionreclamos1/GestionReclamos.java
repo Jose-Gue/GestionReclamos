@@ -4,7 +4,7 @@ package gestionreclamos1;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class GestionReclamos1 {
+public class GestionReclamos {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -14,6 +14,7 @@ public class GestionReclamos1 {
         PilaHistorial historial = new PilaHistorial();
         OrdenadorReclamos ordenador = new OrdenadorReclamos();
         ArrayList<Reclamo> listaParaOrdenar = new ArrayList<>();
+        ArbolAVL arbolAVL = new ArbolAVL();
 
         int opcion;
 
@@ -21,7 +22,8 @@ public class GestionReclamos1 {
             System.out.println("\n--- SISTEMA DE GESTION DE RECLAMOS ---");
             System.out.println("1. Agregar reclamo");
             System.out.println("2. Mostrar todos los reclamos");
-            System.out.println("3. Salir");
+            System.out.println("3. Buscar reclamo por codigo");
+            System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -52,6 +54,7 @@ public class GestionReclamos1 {
                     arbolReclamos.insertar(nuevoReclamo);
                     pendientes.encolar(nuevoReclamo);
                     listaParaOrdenar.add(nuevoReclamo);
+                    arbolAVL.insertar(nuevoReclamo);
 
                     historial.apilar("Reclamo ingresado (Codigo: " + codigo + ")");
                     System.out.println("-> RECLAMO CREADO CON EXITO");
@@ -61,8 +64,21 @@ public class GestionReclamos1 {
                     System.out.println("\n-> TODOS LOS RECLAMOS");
                     listaReclamos.mostrarTodos();
                     break;
-
+                    
                 case 3:
+                    System.out.println("Ingrese codigo a buscar");
+                    int codigoBuscar = sc.nextInt(); sc.nextLine();
+                    Reclamo resultado = arbolAVL.buscar(codigoBuscar);
+                    if(resultado != null) {
+                    System.out.println("Reclamo encontrado: " + resultado);
+                    }else{
+                        System.out.println("Reclamo no encontrado");
+                    }
+                    break;
+                            
+                
+
+                case 4:
                     System.out.println("Saliendo...");
                     break;
 
@@ -70,7 +86,7 @@ public class GestionReclamos1 {
                     System.out.println("Opcion no valida.");
             }
 
-        } while (opcion != 3);
+        } while (opcion != 4);
 
         sc.close();
     }
