@@ -215,7 +215,7 @@ public class GestionReclamos1{
             
             
 
-        } while (opcion != 11);
+        } while (opcion != 10);
 
         sc.close();
     }
