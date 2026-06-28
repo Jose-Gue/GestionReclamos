@@ -19,7 +19,7 @@ public class GestionReclamos1{
         // Reclamos de prueba precargados
         Reclamo r1 = new Reclamo(101, "Juan Pérez", "12345678-9", "Alumbrado", "Poste sin luz en calle Lautaro", "10/06/2026", "Pendiente", 1, "30/06/2026");
         Reclamo r2 = new Reclamo(102, "María Soto", "98765432-1", "Residuos", "Basura no retirada hace 2 semanas", "15/06/2026", "Pendiente", 2, "05/07/2026");
-        Reclamo r3 = new Reclamo(103, "Pedro Rojas", "11222333\"Residuos\", \"Basura no retirada hace 2 semanas\", \"15/06/2026\", \"Pendiente\", 2, \"05/-4", "Áreas Verdes", "Árbol caído en plaza central", "20/06/2026", "Pendiente", 3, "10/07/2026");
+        Reclamo r3 = new Reclamo(103, "Pedro Rojas", "11222333-2", "Áreas Verdes", "Árbol caído en plaza central", "20/06/2026", "Pendiente", 3, "10/07/2026");
 
         listaReclamos.agregar(r1);
         arbolReclamos.insertar(r1);
@@ -50,7 +50,8 @@ public class GestionReclamos1{
             System.out.println("5. Modificar reclamo");
             System.out.println("6. Atender proximo reclamo");
             System.out.println("7. Mostrar historial de acciones ");
-            System.out.println("8. Salir");
+            System.out.println("8. Mostrar reclamos ordenados ");
+            System.out.println("9. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -168,16 +169,38 @@ public class GestionReclamos1{
                     System.out.println("-> HISTORIAL DE ACCIONES");
                     historial.mostrarHistorial();
                     break;
-
+                    
                 case 8:
+                    System.out.println("1. Por Prioridad (Burbuja)");
+                    System.out.println("2. Por Código (Quick Sort)");
+                    System.out.print("Opción: ");
+                    int opcOrden = sc.nextInt();
+                    
+                    if(opcOrden == 1){
+                        ordenador.ordenarBurbujaPorPrioridad(listaParaOrdenar);
+                    }else if(opcOrden == 2){
+                        ordenador.quickSortPorCodigo(listaParaOrdenar, 0, listaParaOrdenar.size() - 1);
+                        System.out.println("Lista ordenada por código (Quick Sort).");
+                    }
+                    
+                    for(Reclamo reclamo : listaParaOrdenar){
+                        System.out.println("Código: " + reclamo.getCodigo() + " | Prioridad: " + reclamo.getPrioridad() + " | Nombre: " + reclamo.getNombre());
+                    }
+                    break;
+
+                case 9:
                     System.out.println("Saliendo...");
                     break;
 
                 default:
                     System.out.println("Opción no válida.");
             }
+            
+            
+            
+            
 
-        } while (opcion != 8);
+        } while (opcion != 9);
 
         sc.close();
     }
