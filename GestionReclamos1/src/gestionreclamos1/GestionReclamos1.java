@@ -49,7 +49,8 @@ public class GestionReclamos1{
             System.out.println("4. Eliminar reclamo");
             System.out.println("5. Modificar reclamo");
             System.out.println("6. Atender proximo reclamo");
-            System.out.println("7. Salir");
+            System.out.println("7. Mostrar historial de acciones ");
+            System.out.println("8. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -162,8 +163,13 @@ public class GestionReclamos1{
                             historial.apilar("Reclamo atendido (Código: " + atendido.getCodigo() + ")");
                         }
                         break;
-
+                        
                 case 7:
+                    System.out.println("-> HISTORIAL DE ACCIONES");
+                    historial.mostrarHistorial();
+                    break;
+
+                case 8:
                     System.out.println("Saliendo...");
                     break;
 
@@ -171,7 +177,7 @@ public class GestionReclamos1{
                     System.out.println("Opción no válida.");
             }
 
-        } while (opcion != 7);
+        } while (opcion != 8);
 
         sc.close();
     }
