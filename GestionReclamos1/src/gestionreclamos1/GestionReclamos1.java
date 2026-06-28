@@ -11,7 +11,7 @@ public class GestionReclamos1{
         Scanner sc = new Scanner(System.in);
         ListaDinamica listaReclamos = new ListaDinamica();
         ArbolReclamos arbolReclamos = new ArbolReclamos();
-        ColaPendientes pendientes = new ColaPendientes();
+        ColaPendientes pendientes = new ColaPendientes(); 
         PilaHistorial historial = new PilaHistorial();
         OrdenadorReclamos ordenador = new OrdenadorReclamos();
         ArrayList<Reclamo> listaParaOrdenar = new ArrayList<>();
@@ -47,7 +47,8 @@ public class GestionReclamos1{
             System.out.println("2. Mostrar todos los reclamos");
             System.out.println("3. Buscar reclamo por código");
             System.out.println("4. Eliminar reclamo");
-            System.out.println("5. Salir");
+            System.out.println("5. Modificar reclamo");
+            System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -122,8 +123,37 @@ public class GestionReclamos1{
                         System.out.println("No existe ese reclamo");
                     }
                     break;
+                    
+                    case 5:
+                        System.out.print("Código del reclamo a modificar: ");
+                        int codModificar = sc.nextInt(); 
+                        sc.nextLine();
 
-                case 5:
+                        Reclamo reclamoMod = arbolReclamos.buscar(codModificar);
+
+                        if(reclamoMod != null){
+                            System.out.print("Nuevo tipo: ");
+                            String tipoNuevo = sc.nextLine();
+                            System.out.print("Nueva descripción: ");
+                            String descNueva = sc.nextLine();
+                            System.out.print("Nueva prioridad (1-3): ");
+                            int prioridadNueva = sc.nextInt();
+                            sc.nextLine();
+
+                            reclamoMod.setTipo(tipoNuevo);
+                            reclamoMod.setDescripcion(descNueva);
+                            reclamoMod.setPrioridad(prioridadNueva);
+
+                            historial.apilar("Reclamo modificado (Código: " + codModificar + ")");
+                            System.out.println("Reclamo modificado con éxito");
+                            }else{
+                                  System.out.println("No existe ese reclamo");
+                                }
+                                break;
+                    
+                    
+
+                case 6:
                     System.out.println("Saliendo...");
                     break;
 
@@ -131,7 +161,7 @@ public class GestionReclamos1{
                     System.out.println("Opción no válida.");
             }
 
-        } while (opcion != 5);
+        } while (opcion != 6);
 
         sc.close();
     }

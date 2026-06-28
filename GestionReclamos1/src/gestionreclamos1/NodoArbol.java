@@ -36,10 +36,4 @@ public class NodoArbol {
     public void setDerecha(NodoArbol derecha) {
         this.derecha = derecha;
     }
-    
-    
-    
-    
 }
-    
-
