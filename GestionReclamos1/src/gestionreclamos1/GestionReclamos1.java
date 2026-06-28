@@ -48,7 +48,8 @@ public class GestionReclamos1{
             System.out.println("3. Buscar reclamo por código");
             System.out.println("4. Eliminar reclamo");
             System.out.println("5. Modificar reclamo");
-            System.out.println("6. Salir");
+            System.out.println("6. Atender proximo reclamo");
+            System.out.println("7. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -84,7 +85,7 @@ public class GestionReclamos1{
                     listaReclamos.agregar(nuevoReclamo);
                     arbolReclamos.insertar(nuevoReclamo);
                     pendientes.encolar(nuevoReclamo);
-                    listaParaOrdenar.add(nuevoReclamo);
+                    listaParaOrdenar.add(nuevoReclamo); 
 
                     historial.apilar("Reclamo ingresado (Código: " + codigo + ")");
                     System.out.println("-> RECLAMO CREADO CON ÉXITO");
@@ -151,9 +152,18 @@ public class GestionReclamos1{
                                 }
                                 break;
                     
-                    
-
                 case 6:
+                   
+                        Reclamo atendido = pendientes.desencolar();
+
+                        if(atendido != null){
+                            atendido.setEstado("En revisión");
+                            System.out.println("Atendiendo a " + atendido.getNombre() + " (Código: " + atendido.getCodigo() + ")");
+                            historial.apilar("Reclamo atendido (Código: " + atendido.getCodigo() + ")");
+                        }
+                        break;
+
+                case 7:
                     System.out.println("Saliendo...");
                     break;
 
@@ -161,7 +171,7 @@ public class GestionReclamos1{
                     System.out.println("Opción no válida.");
             }
 
-        } while (opcion != 6);
+        } while (opcion != 7);
 
         sc.close();
     }
