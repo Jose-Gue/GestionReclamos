@@ -19,7 +19,7 @@ public class GestionReclamos1{
         // Reclamos de prueba precargados
         Reclamo r1 = new Reclamo(101, "Juan Pérez", "12345678-9", "Alumbrado", "Poste sin luz en calle Lautaro", "10/06/2026", "Pendiente", 1, "30/06/2026");
         Reclamo r2 = new Reclamo(102, "María Soto", "98765432-1", "Residuos", "Basura no retirada hace 2 semanas", "15/06/2026", "Pendiente", 2, "05/07/2026");
-        Reclamo r3 = new Reclamo(103, "Pedro Rojas", "11222333-4", "Áreas Verdes", "Árbol caído en plaza central", "20/06/2026", "Pendiente", 3, "10/07/2026");
+        Reclamo r3 = new Reclamo(103, "Pedro Rojas", "11222333\"Residuos\", \"Basura no retirada hace 2 semanas\", \"15/06/2026\", \"Pendiente\", 2, \"05/-4", "Áreas Verdes", "Árbol caído en plaza central", "20/06/2026", "Pendiente", 3, "10/07/2026");
 
         listaReclamos.agregar(r1);
         arbolReclamos.insertar(r1);
@@ -46,7 +46,8 @@ public class GestionReclamos1{
             System.out.println("1. Agregar reclamo");
             System.out.println("2. Mostrar todos los reclamos");
             System.out.println("3. Buscar reclamo por código");
-            System.out.println("4. Salir");
+            System.out.println("4. Eliminar reclamo");
+            System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -104,8 +105,25 @@ public class GestionReclamos1{
                         System.out.println("-> No se encontró ningún reclamo.");
                     }
                     break;
-
+                    
+                    
                 case 4:
+                    System.out.print("Código del reclamo a eliminar: ");
+                    int codEliminar = sc.nextInt();
+                    
+                    boolean seElimino = listaReclamos.eliminar(codEliminar);
+                    
+                    if(seElimino){
+                        arbolReclamos.eliminar(codEliminar);
+                        
+                        historial.apilar("Reclamo eliminado (codigo: " + codEliminar + ")");
+                        System.out.println("Reclamo eliminado.");
+                    }else{
+                        System.out.println("No existe ese reclamo");
+                    }
+                    break;
+
+                case 5:
                     System.out.println("Saliendo...");
                     break;
 
@@ -113,7 +131,7 @@ public class GestionReclamos1{
                     System.out.println("Opción no válida.");
             }
 
-        } while (opcion != 4);
+        } while (opcion != 5);
 
         sc.close();
     }
