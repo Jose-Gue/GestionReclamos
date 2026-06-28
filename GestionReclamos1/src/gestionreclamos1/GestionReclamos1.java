@@ -51,7 +51,8 @@ public class GestionReclamos1{
             System.out.println("6. Atender proximo reclamo");
             System.out.println("7. Mostrar historial de acciones ");
             System.out.println("8. Mostrar reclamos ordenados ");
-            System.out.println("9. Salir");
+            System.out.println("9. Ver recorridos del arbol");
+            System.out.println("10. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -187,8 +188,22 @@ public class GestionReclamos1{
                         System.out.println("Código: " + reclamo.getCodigo() + " | Prioridad: " + reclamo.getPrioridad() + " | Nombre: " + reclamo.getNombre());
                     }
                     break;
-
+                    
                 case 9:
+                    System.out.println("1. InOrden | 2. PreOrden | 3. PostOrden");
+                    System.out.print("Opción: ");
+                    int opcRec = sc.nextInt();
+                    
+                    if(opcRec == 1){
+                        arbolReclamos.mostrarInOrden();
+                    }else if(opcRec == 2){
+                        arbolReclamos.mostrarPreOrden();
+                    }else if(opcRec == 3){
+                        arbolReclamos.mostrarPostOrden();
+                    }
+                    break;
+
+                case 10:
                     System.out.println("Saliendo...");
                     break;
 
@@ -200,7 +215,7 @@ public class GestionReclamos1{
             
             
 
-        } while (opcion != 9);
+        } while (opcion != 11);
 
         sc.close();
     }
